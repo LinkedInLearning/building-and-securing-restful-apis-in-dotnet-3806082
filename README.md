@@ -3,7 +3,7 @@ This is the repository for the LinkedIn Learning course Building and Securing Re
 
 _See the readme file in the main branch for updated instructions and information._
 ## Instructions
-This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
+This repository has branches for each of the videos in the course that shows code examples. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
 
 ## Branches
 The branches are structured to correspond to the videos in the course. The naming convention is `CHAPTER#_MOVIE#`. As an example, the branch named `02_03` corresponds to the second chapter and the third video in that chapter. 
@@ -22,7 +22,8 @@ To resolve this issue:
 
 ## Installing
 1. To use these exercise files, you must have the following installed:
-	- [list of requirements for course]
+	- [Visual Studio Code][vscode-url]
+    - [.NET 8 SDK][net8sdk-url]
 2. Clone this repository into your local machine using the terminal (Mac), CMD (Windows), or a GUI tool like SourceTree.
 3. [Course-specific instructions]
 
@@ -31,4 +32,6 @@ To resolve this issue:
 
 [lil-course-url]: https://www.linkedin.com/learning/
 [lil-thumbnail-url]: http://
+[vscode-url]: https://code.visualstudio.com/
+[net8sdk-url]: https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 
