@@ -1,4 +1,4 @@
-@LiL.TimeTracking_HostAddress = http://localhost:5031
+@LiL.TimeTracking_HostAddress = https://localhost:7228
 
 GET {{LiL.TimeTracking_HostAddress}}/weatherforecast/
 Accept: application/json
