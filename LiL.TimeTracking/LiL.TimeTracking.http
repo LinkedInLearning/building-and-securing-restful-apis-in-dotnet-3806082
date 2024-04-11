@@ -5,6 +5,8 @@ Accept: application/json
 
 ###
 
+# Employee Requests
+
 GET {{LiL.TimeTracking_HostAddress}}/api/Employee
 Accept: application/json 
 
@@ -48,5 +50,92 @@ Content-Type:application/json
 ###
 
 DELETE {{LiL.TimeTracking_HostAddress}}/api/Employee/3
+
+###
+
+#Project Requests
+GET {{LiL.TimeTracking_HostAddress}}/api/Project
+Accept: application/json
+
+###
+
+GET {{LiL.TimeTracking_HostAddress}}/api/Project/1
+Accept: application/json
+
+###
+
+POST {{LiL.TimeTracking_HostAddress}}/api/Project
+Accept: application/json 
+Content-Type: application/json
+
+{
+    "Name":"Big Project",
+    "StartDate": "2023-08-01"
+}
+###
+
+POST {{LiL.TimeTracking_HostAddress}}/api/Project
+Accept: application/json 
+Content-Type: application/json
+
+{
+    "Name":"Small Project",
+    "StartDate": "2024-01-01",
+    "EndDate":"2024-06-01"
+}
+###
+
+PUT {{LiL.TimeTracking_HostAddress}}/api/Project/2
+Accept: application/json 
+Content-Type: application/json
+
+{
+    "Id":2,
+    "Name":"Small Project",
+    "StartDate": "2024-01-01",
+    "EndDate":"2024-05-01"
+}
+###
+
+DELETE {{LiL.TimeTracking_HostAddress}}/api/Project/2
+
+###
+
+
+
+
+# Project Assignment Requests
+
+POST {{LiL.TimeTracking_HostAddress}}/api/ProjectAssignment
+Content-Type:application/json
+
+{
+    "EmployeeId":1,
+    "ProjectId": 1
+}
+
+###
+
+GET {{LiL.TimeTracking_HostAddress}}/api/ProjectAssignment
+Accept: application/json
+
+###
+
+# Time Entry Requests
+
+POST {{LiL.TimeTracking_HostAddress}}/api/TimeEntry
+Content-Type: application/json
+
+{
+    "EmployeeId":1,
+    "ProjectId":1,
+    "DateWorked":"2024-03-02",
+    "HoursWorked":7.75
+}
+
+###
+
+GET {{LiL.TimeTracking_HostAddress}}/api/TimeEntry
+Accept: application/json
 
 ###
