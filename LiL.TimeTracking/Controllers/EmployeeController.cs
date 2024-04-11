@@ -1,3 +1,5 @@
+using LiL.TimeTracking.Models;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,11 +9,22 @@ namespace LiL.TimeTracking.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        private TimeTrackingDbContext ctx;
+
+        public EmployeeController(TimeTrackingDbContext context)
+        {
+            ctx = context;
+        }
+
+
         // GET: api/<EmployeeController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [ProducesResponseType<IEnumerable<Resources.Employee>>(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            //TODO: add logic and parameters for paging
+            var response = ctx.Employees.ProjectToType<Resources.Employee>().AsEnumerable();
+            return Ok(response);
         }
 
         // GET api/<EmployeeController>/5

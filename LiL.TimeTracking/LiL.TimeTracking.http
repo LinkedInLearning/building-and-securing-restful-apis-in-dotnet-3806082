@@ -4,3 +4,8 @@ GET {{LiL.TimeTracking_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{LiL.TimeTracking_HostAddress}}/api/Employee
+Accept: application/json 
+
+###
