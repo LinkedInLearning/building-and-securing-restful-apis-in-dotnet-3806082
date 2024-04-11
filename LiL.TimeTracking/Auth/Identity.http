@@ -1,12 +1,14 @@
 @LiL.TimeTracking_HostAddress = https://localhost:7228
-@AccessToken=CfDJ8NH9Urll4-FAvP1hjDas_C1sqfAfza5_HC_-cPFwvXY0Zsh0Rrd9_9tNDkHpmSupeR6U8INd0yqpcOrZeWKraqs5cAMviw_NZFvpkgKfzawx4oW7PeyCR_uiScwsk4dZwZnXVOtL516_7DAWN52g0FS6qLsWwISUmI1qKNhm6rWthyRdheZOrjpesnwBa5IUaUxuIHya2XpAstBiZmxnFaIw6rSGh7yWOnDNc1o-ZKzUY-ob0MIaucu4wpT8IdBC_322dQXNfEy2ttTfnaSCtru5tXdmqaXrkzFDXraV9SqH5AGldDO_g8tbo3DGSlDCPOv36RW4J0_RtOqjqk2VhYNRCXt3ncx4StoqWDu1PiavJKw-wn1bw54lJ5rOgAAZBmgiCOttJZshZUcjcDCWHW0_Zi3bbvwo4iRBfNDYMnQST33mozea0TV0BLI_QRj6JgoHoEryt6uhR883N9LeFSusttETsD__4uZkyRADsjEd2aApLRRbIaCFA4HeM4ulb8oPKl90aIJIjPV3y4Pi8lTj2yc47vNBcxV4nLwaZKGlu1JwAXt1PEJLaz_mhjpcz-7eHGh-B6HDtAj6tn8Ppx0D4MWU20j66b4plE19s_4L4wM0DG4yygSeWq_6L2oX5QgM2O4EhZ5ztgI0n1yRGCAF2P7hv7msHacKQgHtvv0XomSHbQDeg2SsIyTLQe6tmJ17yzyL3jmSOrCNapd6zEY
+
+# access token should be pasted from login result (no spaces and not quotation marks)
+@AccessToken=
 
 
 POST {{LiL.TimeTracking_HostAddress}}/identity/register
 Content-Type: application/json
 
 {
-    "email":"matt@hplussports.com",
+    "email":"matt@hplussport.com",
     "password":"pass@Word1"
 }
 
@@ -18,7 +20,7 @@ Content-Type: application/json
 Accept:application/json 
 
 {
-    "email":"matt@hplussports.com",
+    "email":"matt@hplussport.com",
     "password":"pass@Word1"
 }
 
