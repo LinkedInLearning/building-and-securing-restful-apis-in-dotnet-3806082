@@ -33,3 +33,16 @@ Content-Type:application/json
     "StartDate": "2020-04-12"
 }
 ###
+
+PATCH {{LiL.TimeTracking_HostAddress}}/api/Employee/2
+Content-Type:application/json 
+
+[
+    {
+        "op":"add",
+        "path":"/name",
+        "value":"Employee 2 (patched)"
+    }
+]
+
+###

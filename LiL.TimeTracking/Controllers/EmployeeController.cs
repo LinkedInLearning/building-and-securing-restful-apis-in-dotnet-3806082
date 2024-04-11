@@ -1,6 +1,8 @@
 using LiL.TimeTracking.Models;
 using Mapster;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.JsonPatch.Converters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -97,6 +99,39 @@ namespace LiL.TimeTracking.Controllers
                 else{
                     return Problem("Problem persisting employee resource", statusCode:StatusCodes.Status500InternalServerError);
                 }
+            }
+            catch(Exception ex){
+                return Problem("Problem persisting employee resource", statusCode:StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        // PATCH api/<EmployeeController>/5
+        [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType<Resources.Employee>(StatusCodes.Status204NoContent)]
+        [ProducesResponseType<ObjectResult>(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType<ObjectResult>(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Patch(int id, [FromBody] JsonPatchDocument<Resources.Employee> value)
+        {
+            if(!ModelState.IsValid){
+                return Problem("Invalid employee resource request", statusCode:StatusCodes.Status400BadRequest);
+            }
+            try{
+                var dbEmployee = await ctx.Employees.FindAsync(id);
+                if(dbEmployee == null){
+                    return NotFound();
+                }
+
+                var employee = dbEmployee.Adapt<Resources.Employee>();
+                //apply the patch changes
+                value.ApplyTo(employee, ModelState);
+
+                var patchedEmployee = employee.Adapt<Models.Employee>();
+                ctx.Entry<Models.Employee>(dbEmployee).CurrentValues.SetValues(patchedEmployee);
+
+                await ctx.SaveChangesAsync();
+                return NoContent();
+
             }
             catch(Exception ex){
                 return Problem("Problem persisting employee resource", statusCode:StatusCodes.Status500InternalServerError);
