@@ -7,3 +7,5 @@ public record Project (int Id, string Name, DateTime StartDate, DateTime? EndDat
 public record TimeEntry(Guid Id, int EmployeeId, int ProjectId, DateOnly DateWorked, decimal HoursWorked);
 
 public record ProjectAssignment(int EmployeeId, int ProjectId, string? EmployeeName, string? ProjectName);
+
+public record Resource(string Name, string Url);
