@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiL.TimeTracking.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(AuthenticationSchemes = "APIKEY")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]

@@ -2,6 +2,7 @@
 
 GET {{LiL.TimeTracking_HostAddress}}/weatherforecast/
 Accept: application/json
+Authorization:APIKEY 123456789
 
 ###
 
