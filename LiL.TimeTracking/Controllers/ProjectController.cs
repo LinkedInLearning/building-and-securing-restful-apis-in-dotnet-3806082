@@ -1,5 +1,6 @@
 using LiL.TimeTracking.Models;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -138,6 +139,7 @@ namespace LiL.TimeTracking.Controllers
 
         // DELETE api/<ProjectController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType<Resources.Project>(StatusCodes.Status204NoContent)]
         [ProducesResponseType<ObjectResult>(StatusCodes.Status500InternalServerError)]

@@ -1,6 +1,7 @@
 using Elfie.Serialization;
 using LiL.TimeTracking.Models;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.JsonPatch.Converters;
@@ -12,6 +13,7 @@ namespace LiL.TimeTracking.Controllers
 {
     [Route("api/[controller]")] // /api/Employee
     [ApiController]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         private TimeTrackingDbContext ctx;
