@@ -29,9 +29,17 @@ namespace LiL.TimeTracking.Controllers
 
         // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
-        public string Get(int id)  //parameters map to the template by name
+        [ProducesResponseType<Resources.Employee>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Get(int id)  //parameters map to the template by name
         {
-            return "value";
+            var dbEmployee = await ctx.Employees.FindAsync(id);
+            if(dbEmployee == null){
+                return NotFound();
+            }
+
+            var response = dbEmployee.Adapt<Resources.Employee>();
+            return Ok(response);
         }
 
         // POST api/<EmployeeController>
