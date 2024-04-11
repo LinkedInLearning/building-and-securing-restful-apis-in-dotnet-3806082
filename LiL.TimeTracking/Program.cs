@@ -1,5 +1,6 @@
 using LiL.TimeTracking.Auth;
 using LiL.TimeTracking.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +15,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthentication().AddScheme<APIKeyOptions, APIKeyAuthHandler>("APIKEY", o=>o.DisplayMessage="API Key Authenticator"); 
 
+
 builder.Services.AddDbContext<TimeTrackingDbContext>(options => 
     options.UseSqlite(builder.Configuration.GetConnectionString("TrackingDbContext")));
+
+builder.Services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<TimeTrackingDbContext>();
 
     
 var app = builder.Build();
@@ -32,5 +36,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// e.g.  /identity/login
+app.MapGroup("identity").MapIdentityApi<IdentityUser>();
 
 app.Run();
