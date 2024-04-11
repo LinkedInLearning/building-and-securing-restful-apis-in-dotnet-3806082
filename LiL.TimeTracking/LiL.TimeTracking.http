@@ -53,6 +53,11 @@ DELETE {{LiL.TimeTracking_HostAddress}}/api/Employee/3
 
 ###
 
+GET {{LiL.TimeTracking_HostAddress}}/api/Employee/1/Projects
+Accept: application/json
+
+###
+
 #Project Requests
 GET {{LiL.TimeTracking_HostAddress}}/api/Project
 Accept: application/json
