@@ -2,6 +2,7 @@ using LiL.TimeTracking.Models;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace LiL.TimeTracking.Controllers
@@ -70,8 +71,36 @@ namespace LiL.TimeTracking.Controllers
 
         // PUT api/<EmployeeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType<Resources.Employee>(StatusCodes.Status204NoContent)]
+        [ProducesResponseType<ObjectResult>(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType<ObjectResult>(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Put(int id, [FromBody] Resources.Employee value)
         {
+            if(!ModelState.IsValid){
+                return Problem("Invalid employee resource request", statusCode:StatusCodes.Status400BadRequest);
+            }
+            try{
+                var dbEmployee = value.Adapt<Models.Employee>();
+
+                ctx.Entry<Models.Employee>(dbEmployee).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await ctx.SaveChangesAsync();
+                return NoContent();
+
+            }
+            catch(DbUpdateConcurrencyException dbex){
+                var dbEmployee = ctx.Employees.Find(id);
+                if(dbEmployee == null)
+                {
+                    return NotFound();
+                }
+                else{
+                    return Problem("Problem persisting employee resource", statusCode:StatusCodes.Status500InternalServerError);
+                }
+            }
+            catch(Exception ex){
+                return Problem("Problem persisting employee resource", statusCode:StatusCodes.Status500InternalServerError);
+            }
         }
 
         // DELETE api/<EmployeeController>/5

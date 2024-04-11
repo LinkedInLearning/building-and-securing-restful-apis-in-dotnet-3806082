@@ -23,3 +23,13 @@ Content-Type:application/json
     "StartDate": "2020-03-12"
 }
 ###
+
+PUT {{LiL.TimeTracking_HostAddress}}/api/Employee/2
+Content-Type:application/json 
+
+{
+    "Id":2,
+    "Name":"Employee 2 (updated)",
+    "StartDate": "2020-04-12"
+}
+###
