@@ -1,3 +1,4 @@
+using LiL.TimeTracking.Auth;
 using LiL.TimeTracking.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,8 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthentication().AddScheme<APIKeyOptions, APIKeyAuthHandler>("APIKEY", o=>o.DisplayMessage="API Key Authenticator"); 
 
 builder.Services.AddDbContext<TimeTrackingDbContext>(options => 
     options.UseSqlite(builder.Configuration.GetConnectionString("TrackingDbContext")));
