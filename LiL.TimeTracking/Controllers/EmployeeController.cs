@@ -1,3 +1,4 @@
+using Elfie.Serialization;
 using LiL.TimeTracking.Models;
 using Mapster;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,17 @@ namespace LiL.TimeTracking.Controllers
         {
             //TODO: add logic and parameters for paging
             var response = ctx.Employees.ProjectToType<Resources.Employee>().AsEnumerable();
-            return Ok(response);
+            
+            var lEmployees = new List<Resources.LinkedResource<Resources.Employee>>();
+
+            foreach(var e in response)
+            {
+                var lEmp = new Resources.LinkedResource<Resources.Employee>(e);
+                lEmp.Links.Add(new Resources.Resource("Projects", $"/api/Employee/{e.Id}/Projects"));
+                lEmployees.Add(lEmp);
+            }
+            
+            return Ok(lEmployees);
         }
 
         // GET api/<EmployeeController>/5
@@ -43,9 +54,38 @@ namespace LiL.TimeTracking.Controllers
             }
 
             var response = dbEmployee.Adapt<Resources.Employee>();
-            return Ok(response);
+            var lEmployee = new Resources.LinkedResource<Resources.Employee>(response);
+            lEmployee.Links.Add(new Resources.Resource("Projects", $"/api/Employee/{response.Id}/Projects"));
+
+            return Ok(lEmployee);
         }
 
+        // GET api/<EmployeeController>/5/Projects
+        [HttpGet("{id}/Projects")]
+        [ProducesResponseType<List<Resources.Project>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetProjects(int id)  //parameters map to the template by name
+        {
+            var employee = await ctx.Employees.FindAsync(id);
+
+            if(employee == null)
+            {
+                return NotFound();
+            }
+            else{
+
+
+                await ctx.Entry(employee).Collection(e=>e.Projects).LoadAsync();
+                var projects = new List<Resources.Project>();
+
+                foreach (var p in employee.Projects){
+                    var rProject = p.Adapt<Resources.Project>();
+                    projects.Add(rProject);
+                }
+
+                return Ok(projects);
+            }
+        }
         // POST api/<EmployeeController>
         [HttpPost]
         [ProducesResponseType<Resources.Employee>(StatusCodes.Status201Created)]
