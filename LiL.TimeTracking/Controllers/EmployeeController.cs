@@ -140,8 +140,25 @@ namespace LiL.TimeTracking.Controllers
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType<Resources.Employee>(StatusCodes.Status204NoContent)]
+        [ProducesResponseType<ObjectResult>(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(int id)
         {
+            var dbEmployee = await ctx.Employees.FindAsync(id);
+            if(dbEmployee == null)
+            {
+                return NotFound();
+            }
+
+            try{
+                ctx.Employees.Remove(dbEmployee);
+                await ctx.SaveChangesAsync();
+                return NoContent();
+            }
+            catch(Exception ex){
+                return Problem("Problem deleting employee resource", statusCode:StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }
