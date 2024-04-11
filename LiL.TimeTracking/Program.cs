@@ -1,5 +1,6 @@
 using LiL.TimeTracking.Auth;
 using LiL.TimeTracking.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,14 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//add authorization with policies
+builder.Services.AddSingleton<IAuthorizationHandler, EmailDomainHandler>();
+
+builder.Services.AddAuthorization(options => 
+    options.AddPolicy("EmailDomain", 
+        policy=> policy.AddRequirements(new EmailDomainRequirement("hplussport.com")))
+);
 
 builder.Services.AddAuthentication().AddScheme<APIKeyOptions, APIKeyAuthHandler>("APIKEY", o=>o.DisplayMessage="API Key Authenticator"); 
 

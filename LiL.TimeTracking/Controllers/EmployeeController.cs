@@ -13,7 +13,7 @@ namespace LiL.TimeTracking.Controllers
 {
     [Route("api/[controller]")] // /api/Employee
     [ApiController]
-    [Authorize]
+    [Authorize(policy:"EmailDomain")]
     public class EmployeeController : ControllerBase
     {
         private TimeTrackingDbContext ctx;
