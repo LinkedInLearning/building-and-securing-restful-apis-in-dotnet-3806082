@@ -14,3 +14,12 @@ GET {{LiL.TimeTracking_HostAddress}}/api/Employee/1
 Accept: application/json 
 
 ###
+
+POST {{LiL.TimeTracking_HostAddress}}/api/Employee
+Content-Type:application/json 
+
+{
+    "Name":"Employee 2",
+    "StartDate": "2020-03-12"
+}
+###

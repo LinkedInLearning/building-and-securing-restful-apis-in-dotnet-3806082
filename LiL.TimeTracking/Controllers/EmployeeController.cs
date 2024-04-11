@@ -2,6 +2,7 @@ using LiL.TimeTracking.Models;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace LiL.TimeTracking.Controllers
 {
@@ -44,8 +45,27 @@ namespace LiL.TimeTracking.Controllers
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType<Resources.Employee>(StatusCodes.Status201Created)]
+        [ProducesResponseType<ObjectResult>(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType<ObjectResult>(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Post([FromBody] Resources.Employee value)
         {
+            if(!ModelState.IsValid){
+                return Problem("Invalid employee resource request", statusCode:StatusCodes.Status400BadRequest);
+            }
+            try{
+                var dbEmployee = value.Adapt<Models.Employee>();
+
+                await ctx.Employees.AddAsync(dbEmployee);
+                await ctx.SaveChangesAsync();
+
+                var response = dbEmployee.Adapt<Resources.Employee>();
+
+                return CreatedAtAction(nameof(Get), new {id=response.Id}, response);
+            }
+            catch(Exception ex){
+                return Problem("Problem persisting employee resource", statusCode:StatusCodes.Status500InternalServerError);
+            }
         }
 
         // PUT api/<EmployeeController>/5
