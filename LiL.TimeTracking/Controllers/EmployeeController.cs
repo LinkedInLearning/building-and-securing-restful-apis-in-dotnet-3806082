@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LiL.TimeTracking.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] // /api/Employee
     [ApiController]
     public class EmployeeController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace LiL.TimeTracking.Controllers
 
         // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(int id)  //parameters map to the template by name
         {
             return "value";
         }
