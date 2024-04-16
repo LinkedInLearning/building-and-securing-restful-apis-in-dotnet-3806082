@@ -6,7 +6,7 @@ POST {{LiL.TimeTracking_HostAddress}}/identity/register
 Content-Type: application/json
 
 {
-    "email":"matt@hplussports.com",
+    "email":"matt@hplussport.com",
     "password":"pass@Word1"
 }
 
@@ -18,7 +18,7 @@ Content-Type: application/json
 Accept:application/json 
 
 {
-    "email":"matt@hplussports.com",
+    "email":"matt@hplussport.com",
     "password":"pass@Word1"
 }
 
