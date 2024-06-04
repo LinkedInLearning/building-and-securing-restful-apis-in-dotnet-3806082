@@ -1,6 +1,12 @@
 # Building and Securing Restful APIs in .NET
 This is the repository for the LinkedIn Learning course Building and Securing Restful APIs in .NET. The full course is available from [LinkedIn Learning][lil-course-url].
 
+![lil-thumbnail-url]
+
+Most people have heard of REST APIs, but the underlying concept—representational state transfer (REST)—can still cause a good deal of confusion. RESTful APIs use REST architecture along with HTTP requests to transfer data and changes in application state between clients and servers. This course shows you how to apply the principles of REST while building secure RESTful APIs on top of ASP.NET.
+
+Join instructor Matt Milner as he provides an overview of how to get up and running with RESTful design in ASP.NET. Learn how to create APIs, entities, and databases, as well as work with resources, add link support, and configure and enable authentication options. By the end of the course, you should know the basics—how to properly request and return data in ASP.NET—and the best practices for building secure and scalable APIs to serve web clients, mobile clients, and beyond.
+
 _See the readme file in the main branch for updated instructions and information._
 ## Instructions
 This repository has branches for each of the videos in the course that shows code examples. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
@@ -25,13 +31,23 @@ To resolve this issue:
 	- [Visual Studio Code][vscode-url]
     - [.NET 8 SDK][net8sdk-url]
 2. Clone this repository into your local machine using the terminal (Mac), CMD (Windows), or a GUI tool like SourceTree.
-3. [Course-specific instructions]
+
+
+### Instructor
+
+Matt Milner
+
+Independent Consultant, Web Developer, Trainer
+
+                            
+
+Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/matt-milner?u=104).
 
 
 [0]: # (Replace these placeholder URLs with actual course URLs)
 
-[lil-course-url]: https://www.linkedin.com/learning/
-[lil-thumbnail-url]: http://
+[lil-course-url]: https://www.linkedin.com/learning/building-and-securing-restful-apis-in-dot-net
+[lil-thumbnail-url]: https://media.licdn.com/dms/image/D4E0DAQHYuErIMEOjXw/learning-public-crop_675_1200/0/1716919545186?e=2147483647&v=beta&t=hOU5JJxa_EBLxQwnNg13Qoio-oAYuo1fHcDShgXa9SA
 [vscode-url]: https://code.visualstudio.com/
 [net8sdk-url]: https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 
